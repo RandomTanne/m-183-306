@@ -25,6 +25,6 @@ public class HelloWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        // Optionally handle incoming messages
+        session.sendMessage(new TextMessage("pong"));
     }
 }
