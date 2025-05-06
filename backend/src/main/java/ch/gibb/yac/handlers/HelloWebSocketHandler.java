@@ -3,11 +3,13 @@ package ch.gibb.yac.handlers;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.util.Objects;
+
 public class HelloWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        session.sendMessage(new TextMessage("Hello"));
+        session.sendMessage(new TextMessage("Hello " + Objects.requireNonNull(session.getPrincipal()).getName()));
     }
 
     @Override
