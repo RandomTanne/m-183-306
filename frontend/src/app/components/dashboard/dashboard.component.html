@@ -1,0 +1,23 @@
+<div class="text-center mt-3 sm:mt-4 md:mt-4.5 lg:mt-5 w-full grid gap-2">
+  <h1 class="text-5xl md:text-6xl lg:text-7xl">Welcome to YAC</h1>
+  <p class="md:text-lg lg:text-xl">
+    Start a new private Chat by entering someones username
+  </p>
+  <form
+    class="p-2 sm:p-4 md:p-8 grid-cols-1 items-center gap-3 w-full grid md:grid-cols-[1fr_auto]"
+    [formGroup]="requestChatForm"
+  >
+    <input
+      class="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 rounded-lg h-full sm:text-lg md:text-xl lg:text-2xl p-1.5 md:p-2 lg:p-3 placeholder:text-gray-500"
+      formControlName="targetUsername"
+      type="text"
+      placeholder="Enter username here"
+    />
+    <button
+      type="submit"
+      class="h-full sm:text-lg md:text-xl lg:text-2xl bg-indigo-300 rounded-lg p-1.5 md:p-2 lg:p-3"
+    >
+      Request chat
+    </button>
+  </form>
+</div>

@@ -19,6 +19,7 @@ export class AuthService {
         expiration: string;
       }>('http://localhost:8080/api/auth/signin', userDetails, {
         responseType: 'json',
+        withCredentials: true,
       })
       .pipe(
         map((response) => {

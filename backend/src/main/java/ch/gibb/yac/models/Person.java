@@ -2,6 +2,7 @@ package ch.gibb.yac.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,10 +15,10 @@ public class Person implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password must not be null")
+    @Length(min = 12, message = "Password must be at least 12 characters long")
     private String password;
 
     @Override

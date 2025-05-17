@@ -3,6 +3,7 @@ package ch.gibb.yac.security;
 import ch.gibb.yac.services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils;
 import java.io.IOException;
 
 @Component
@@ -18,7 +20,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtils;
 
     private final CustomUserDetailsService userDetailsService;
-
 
     public AuthTokenFilter(JwtUtil jwtUtils, CustomUserDetailsService userDetailsService) {
         this.jwtUtils = jwtUtils;
@@ -53,10 +54,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     }
 
     private String parseJwt(HttpServletRequest request) {
-        String headerAuth = request.getHeader("Authorization");
-        if (headerAuth != null && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
-        }
-        return null;
+        Cookie cookieAuth = WebUtils.getCookie(request, "JWT_Token");
+
+        return cookieAuth.getValue();
     }
 }
